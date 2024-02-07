@@ -36,7 +36,7 @@ class NoteControllerTest extends TestCase
         ]);
         $this->assertCount($count + 1, Note::get());
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
     }
 
     public function test_show(): void
@@ -61,6 +61,6 @@ class NoteControllerTest extends TestCase
 
         $this->assertCount($count - 1, Note::get());
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
     }
 }
