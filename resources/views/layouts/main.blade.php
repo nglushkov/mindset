@@ -10,9 +10,15 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-12">
-            <p><a href="{{ route('notes.index') }}">Mindset</a> <a href="{{ route('notes.create') }}">Create</a></p>
-        </div>
+        @if (!Auth::guest())
+            <div class="col-12">
+                <p>
+                    <a href="{{ route('notes.index') }}">Mindset</a>
+                    <a href="{{ route('notes.create') }}">Create</a>
+                    <a href="{{ route('logout') }}">Logout</a>
+                </p>
+            </div>
+        @endif
         <div class="col-12">
             @yield('content')
         </div>

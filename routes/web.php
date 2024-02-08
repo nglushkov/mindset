@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NoteController;
 
@@ -14,11 +15,12 @@ use App\Http\Controllers\NoteController;
 |
 */
 
-// Route::controller(NoteController::class)->group(function () {
-//     Route::get('/', 'index')->name('notes.index');
-//     Route::get('/notes/create', 'create')->name('notes.create');
-//     Route::get('/notes/show/{id}', 'show')->name('notes.show');
-//     Route::get('/notes/edit{id}', 'edit')->name('notes.edit');
-// });
-Route::get('/', [NoteController::class, 'index']);
-Route::resource('notes', NoteController::class);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [NoteController::class, 'index']);
+    Route::resource('notes', NoteController::class);
+    
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+});
+
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('authenticate');
