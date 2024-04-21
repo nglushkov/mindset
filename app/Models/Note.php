@@ -11,7 +11,7 @@ class Note extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['content'];
+    protected $fillable = ['title', 'content'];
 
     public function comments(): HasMany
     {
@@ -20,6 +20,6 @@ class Note extends Model
 
     public function getCreatedAtAttribute($value)
     {
-        return \Carbon\Carbon::parse($value)->format('d.m.Y H:i:s'); // Ваш выбранный формат
+        return \Carbon\Carbon::parse($value)->format('d.m.Y H:i:s');
     }
 }

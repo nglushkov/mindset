@@ -14,7 +14,7 @@ class NoteController extends Controller
     public function index()
     {
         return view('note.index', [
-            'notes' => Note::orderByDesc('created_at')->with('comments')->paginate(20)
+            'notes' => Note::orderByDesc('created_at')->with('comments')->paginate(100)
         ]);
     }
 
@@ -31,11 +31,9 @@ class NoteController extends Controller
      */
     public function store(StoreNoteRequest $request)
     {
-        $validated = $request->safe()->only(['content']);
-
         $note = new Note;
-        $note->fill($validated);
-        $note->user_id = 1;
+        $note->fill($request->validated());
+        $note->user_id = auth()->id();
         $note->save();
 
         return redirect()->route('notes.index');
@@ -62,8 +60,8 @@ class NoteController extends Controller
      */
     public function update(UpdateNoteRequest $request, Note $note)
     {
-        $validated = $request->safe()->only(['content']);
-        $note->update($validated);
+        $note->fill($request->validated());
+        $note->update($request->validated());
 
         return redirect()->route('notes.show', ['note' => $note->id]);
     }

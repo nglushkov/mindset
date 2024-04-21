@@ -11,7 +11,7 @@
 <div class="container">
     <div class="row">
         @if (!Auth::guest())
-            <div class="col-12">
+            <div class="col-12 p-3 pb-0">
                 <p>
                     <a href="{{ route('notes.index') }}">Mindset</a>
                     <a href="{{ route('notes.create') }}">Create</a>
@@ -19,7 +19,7 @@
                 </p>
             </div>
         @endif
-        <div class="col-12">
+        <div class="col-md-12">
             @yield('content')
         </div>
     </div>

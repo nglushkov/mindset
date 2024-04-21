@@ -19,6 +19,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Note::factory(50)->create();
-        \App\Models\Comment::factory(10)->create();
+//        \App\Models\Comment::factory(10)->create();
     }
 }

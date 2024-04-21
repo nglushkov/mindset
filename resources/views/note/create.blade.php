@@ -5,8 +5,10 @@
         @csrf
 
         <div class="mb-3">
-            <label for="content" class="form-label">Content:</label>
-            <textarea rows=10 class="form-control" name="content" required>{{ old('content') }}</textarea>
+            <input name="title" maxlength="255" class="form-control w-50">
+        </div>
+        <div class="mb-3">
+            <textarea rows=10 class="form-control" name="content" required autofocus>{{ old('content') }}</textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>

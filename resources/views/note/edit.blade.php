@@ -8,7 +8,10 @@
         @method('PUT')
 
         <div class="mb-3">
-            <label for="content" class="form-label">Content:</label>
+            <input name="title" maxlength="255" class="form-control w-50" value="{{ $note->title }}">
+        </div>
+
+        <div class="mb-3">
             <textarea rows=10 class="form-control" name="content" required>{{ old('content', $note->content) }}</textarea>
         </div>
 
