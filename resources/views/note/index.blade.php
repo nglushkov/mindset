@@ -14,7 +14,7 @@
             </p>
             <div style="cursor: pointer;" onclick="window.location.href = '{{ route('notes.show', $note->id) }}'">
                 <p><strong>{{ $note->title }}</strong></p>
-                <p id="note-content-{{ $note->id }}">{!! nl2br(Str::limit($note->content, 100)) !!}</p>
+                <p id="note-content-{{ $note->id }}"><pre class="mb-0">{!! nl2br(Str::limit($note->content, 100)) !!}</pre></p>
             </div>
         </div>
     </div>
