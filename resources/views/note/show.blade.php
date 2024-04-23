@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', $note->title ? 'Mindset ' . $note->title : 'Mindset Note Show')
 
 @section('content')
     <div class="mb-3">
@@ -7,6 +8,9 @@
         @endif
         <p>
             <a href="#" onclick="copyContent({{ $note->id }});return false;" class="btn btn-sm btn-light">📋 Copy</a>
+            @foreach($note->tags as $tag)
+                <a href="{{ route('notes.index', ['tag_id' => $tag->id]) }}">{{ $tag->name }}</a>
+            @endforeach
             <span class="text-muted mb-3 fw-light small">{{ $note->created_at }}</span>
         </p>
 
@@ -15,11 +19,11 @@
         </div>
 
         <form action="{{ route('notes.destroy', $note->id) }}" method="post" class="mt-3">
-            <a href="{{ route('notes.edit', $note->id) }}" class="btn btn-light">✏️ Edit</a>
+            <a href="{{ route('notes.edit', $note->id) }}" class="btn btn-light btn-sm">✏️ Edit</a>
 
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-light" onclick="return confirmDelete()">🗑️ Delete</button>
+            <button type="submit" class="btn btn-light btn-sm" onclick="return confirmDelete()">🗑️ Delete</button>
         </form>
     </div>
 
