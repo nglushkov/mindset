@@ -21,7 +21,7 @@ class Note extends Model
 
     public function getCreatedAtAttribute($value)
     {
-        return \Carbon\Carbon::parse($value)->format('d.m.Y H:i:s');
+        return \Carbon\Carbon::parse($value)->format('d.m.Y');
     }
 
     public function tags(): BelongsToMany
