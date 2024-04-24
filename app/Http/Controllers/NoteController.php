@@ -18,6 +18,7 @@ class NoteController extends Controller
     {
         $query = Note::orderByDesc('created_at')->with(['comments', 'tags']);
         $tagId = $request->input('tag_id');
+        $search = $request->input('search');
 
         if (!empty($tagId)) {
             if ($tagId != -1) {
@@ -29,12 +30,25 @@ class NoteController extends Controller
                 $query->whereDoesntHave('tags');
             }
         }
+
+        if (!empty($search)) {
+            $search = '%' . $search . '%';
+            $query->where(function ($query) use ($search) {
+                $query->where('title', 'like', $search)
+                    ->orWhere('content', 'like', $search)
+                    ->orWhereHas('tags', function ($query) use ($search) {
+                        $query->where('name', 'like', $search);
+                    });
+            });
+        }
+
         $notes = $query->paginate(100);
 
         return view('note.index', [
             'notes' => $notes
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.

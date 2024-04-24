@@ -3,6 +3,9 @@
 
 @section('content')
 
+@if(!$notes->count())
+    <h3 class="text-muted">Notes is not found...</h3>
+@endif
 @foreach($notes as $note)
     <div class="card mb-3">
         <div class="card-body pb-0">

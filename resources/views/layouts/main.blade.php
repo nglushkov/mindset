@@ -13,13 +13,19 @@
         @if (!Auth::guest())
             <header class="py-3">
                 <div class="container p-0">
-                    <div class="row">
+                    <div class="row align-items-center">
                         <div class="col-md-4">
-                            <a href="{{ route('notes.create') }}" class="btn btn btn-primary btn-sm">Create Note</a>
-                            <a href="{{ route('notes.index') }}" class="btn btn-sm btn-light">Index</a>
+                            <a href="{{ route('notes.create') }}" class="btn btn-primary btn-sm">Create Note</a>
+                            <a href="{{ route('notes.index') }}" class="btn btn-light btn-sm">Index</a>
                         </div>
-                        <div class="col-md-8 text-end">
-                            <a href="{{ route('logout') }}" class="btn btn-light btn-sm text-end">Logout</a>
+                        <div class="col-md-4">
+                            <form action="{{ route('notes.index') }}" method="GET" class="d-flex">
+                                <input type="text" name="search" class="form-control form-control-sm me-2" placeholder="Search" value="{{ request()->input('search') }}">
+                                <button type="submit" class="btn btn-light btn-sm">Search</button>
+                            </form>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <a href="{{ route('logout') }}" class="btn btn-light btn-sm">Logout</a>
                         </div>
                     </div>
                 </div>
