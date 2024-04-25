@@ -68,7 +68,6 @@ class NoteController extends Controller
      */
     public function store(StoreNoteRequest $request)
     {
-        // Begin a database transaction
         DB::beginTransaction();
 
         try {
@@ -77,27 +76,20 @@ class NoteController extends Controller
             $selectedTags = Tag::whereIn('id', $selectedTagIds)->get();
             $selectedTagNames = $selectedTags->pluck('name')->toArray();
 
-            // Split the tags input string into an array and remove leading and trailing spaces
             $tagNames = explode(',', $tagNames);
             $tagNames = array_map('trim', $tagNames);
 
-            // Remove empty tags
             $tagNames = array_filter($tagNames);
 
-            // Merge the selected tags and input tags to get all tags to be associated with the note
             $allTags = array_merge($selectedTagNames, $tagNames);
 
-            // Create a new note
             $note = new Note;
             $note->fill($request->validated());
             $note->user_id = auth()->id();
             $note->save();
 
-            // Associate tags with the note
             foreach ($allTags as $tagName) {
-                // Find the tag by name or create a new one if it doesn't exist
                 $tag = Tag::firstOrCreate(['name' => $tagName]);
-                // Attach the tag to the note
                 $note->tags()->attach($tag);
             }
 
