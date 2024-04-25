@@ -15,7 +15,9 @@
         </p>
 
         <div class="card">
-            <div class="card-body" id="note-content-{{ $note->id }}"><pre class="mb-0">{!! nl2br($note->content) !!}</pre></div>
+            <div class="card-body" id="note-content-{{ $note->id }}">
+                <pre class="mb-0">{!! nl2br(htmlspecialchars($note->content)) !!}</pre>
+            </div>
         </div>
 
         <form action="{{ route('notes.destroy', $note->id) }}" method="post" class="mt-3">

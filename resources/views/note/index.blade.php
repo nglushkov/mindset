@@ -24,7 +24,7 @@
             </div>
             <div style="cursor: pointer;" onclick="window.location.href = '{{ route('notes.show', $note->id) }}'">
                 <p></p>
-                <div><pre class="m-0"><span id="note-content-{{ $note->id }}">{!! nl2br(Str::limit($note->content, 100)) !!}</span></pre></div>
+                <div><pre class="m-0"><span id="note-content-{{ $note->id }}">{!! nl2br(htmlspecialchars(Str::limit($note->content, 100))) !!}</span></pre></div>
             </div>
         </div>
     </div>
