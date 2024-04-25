@@ -39,10 +39,12 @@
                         All
                         <span class="badge bg-secondary rounded-pill">{{ $totalNotesCount }}</span>
                     </a>
-                    <a href="{{ route('notes.index', ['tag_id' => -1]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ request()->input('tag_id') == -1 ? 'active' : '' }}">
-                        Without Tags
-                        <span class="badge bg-secondary rounded-pill">{{ $notesWithoutTagsCount }}</span>
-                    </a>
+                    @if($notesWithoutTagsCount > 0)
+                        <a href="{{ route('notes.index', ['tag_id' => -1]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ request()->input('tag_id') == -1 ? 'active' : '' }}">
+                            Without Tags
+                            <span class="badge bg-secondary rounded-pill">{{ $notesWithoutTagsCount }}</span>
+                        </a>
+                    @endif
                     @foreach($tags as $tag)
                         <a href="{{ route('notes.index', ['tag_id' => $tag->id]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ request()->input('tag_id') == $tag->id ? 'active' : '' }}">
                             {{ $tag->name }}
