@@ -31,8 +31,8 @@ class StoreNoteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required_without:content|nullable|max:70',
-            'content' => 'required_without:title|nullable|max:10000',
+            'title' => 'required_without:content|nullable|max:100',
+            'content' => 'required_without:title|nullable|max:50000',
             'tags' => 'nullable|array',
             'tags.*' => 'nullable|string|max:255',
             'tagsInput' => 'nullable|string|max:255',
