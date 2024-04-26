@@ -52,5 +52,16 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
+        <form action="{{ route('notes.destroy', $note->id) }}" method="post" class="mt-3">
+
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-light" onclick="return confirmDelete()">🗑️ Delete</button>
+        </form>
     </form>
+    <script>
+        function confirmDelete() {
+            return confirm('Are you sure you want to delete this note?');
+        }
+    </script>
 @endsection
