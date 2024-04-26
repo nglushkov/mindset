@@ -52,12 +52,12 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
-        <form action="{{ route('notes.destroy', $note->id) }}" method="post" class="mt-3">
+    </form>
+    <form action="{{ route('notes.destroy', $note->id) }}" method="post" class="mt-3">
 
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-light" onclick="return confirmDelete()">🗑️ Delete</button>
-        </form>
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-light" onclick="return confirmDelete()">🗑️ Delete</button>
     </form>
     <script>
         function confirmDelete() {
