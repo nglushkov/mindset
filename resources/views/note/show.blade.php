@@ -16,7 +16,7 @@
 
         <div class="card">
             <div class="card-body" id="note-content-{{ $note->id }}">
-                <pre class="mb-0">{!! nl2br(htmlspecialchars($note->content)) !!}</pre>
+                <pre class="mb-0">{!! htmlspecialchars($note->content) !!}</pre>
             </div>
         </div>
 
@@ -32,7 +32,7 @@
     @if ($note->comments->count() > 0)
         <p><u>Comments:</u></p>
         @foreach($note->comments as $comment)
-            <p>{!! nl2br($comment->content) !!}</p>
+            <p>{{ $comment->content }}</p>
         @endforeach
     @endif
 

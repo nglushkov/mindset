@@ -12,7 +12,7 @@ class Note extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'content'];
+    protected $fillable = ['title', 'content', 'is_title_by_ai', 'is_content_by_ai'];
 
     public function comments(): HasMany
     {

@@ -13,7 +13,7 @@
                 <div>
                     <a href="#" onclick="copyContent({{ $note->id }});return false;" class="btn btn-sm btn-light">📋</a>
                     <a href="{{ route('notes.edit', $note->id) }}" class="btn btn-sm btn-light">✏️</a>
-                    <strong style="cursor: pointer;" onclick="window.location.href = '{{ route('notes.show', $note->id) }}'">{{ Str::limit($note->title, 50) }}</strong>&nbsp;
+                    <strong style="cursor: pointer;" onclick="window.location.href = '{{ route('notes.show', $note->id) }}'">@if($note->is_title_by_ai) 🤖 @endif {{ Str::limit($note->title, 50) }}</strong>&nbsp;
                     @foreach($note->tags as $tag)
                         <a href="{{ route('notes.index', ['tag_id' => $tag->id]) }}">{{ $tag->name }}</a>
                     @endforeach
@@ -24,7 +24,7 @@
             </div>
             <div style="cursor: pointer;" onclick="window.location.href = '{{ route('notes.show', $note->id) }}'">
                 <p></p>
-                <div><pre class="m-0"><span id="note-content-{{ $note->id }}">{!! nl2br(htmlspecialchars(Str::limit($note->content, 100))) !!}</span></pre></div>
+                <div><pre class="m-0">@if($note->is_content_by_ai) 🤖 @endif<span id="note-content-{{ $note->id }}">{!! htmlspecialchars(Str::limit($note->content, 100)) !!}</span></pre></div>
             </div>
         </div>
     </div>

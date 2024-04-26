@@ -28,7 +28,7 @@
         <div class="mb-3 row">
             <label for="title" class="fw-bold col-md-2">Content:</label>
             <div class="col-md-10">
-                <textarea rows=10 class="form-control" name="content"  id="content" required autofocus>{{ old('content') }}</textarea>
+                <textarea rows=10 class="form-control" name="content"  id="content" autofocus>{{ old('content') }}</textarea>
             </div>
         </div>
         <div class="mb-3 row">
@@ -50,6 +50,6 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" onclick="this.disabled=true; this.innerHTML='Submitting...'; this.form.submit();">Submit</button>
     </form>
 @endsection
