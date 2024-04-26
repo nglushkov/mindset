@@ -31,8 +31,8 @@ class StoreNoteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'nullable|max:70',
-            'content' => 'nullable|max:10000',
+            'title' => 'required_without:content|nullable|max:70',
+            'content' => 'required_without:title|nullable|max:10000',
             'tags' => 'nullable|array',
             'tags.*' => 'nullable|string|max:255',
             'tagsInput' => 'nullable|string|max:255',
@@ -43,14 +43,14 @@ class StoreNoteRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        if (!$this->filled('title')) {
+        if (!$this->filled('title') && $this->filled('content')) {
             $this->merge([
                 'title' => $this->openAIService->getNoteTitle($this->content),
                 'is_title_by_ai' => true,
             ]);
         }
 
-        if (!$this->filled('content')) {
+        if (!$this->filled('content') && $this->filled('title')) {
             $this->merge([
                 'content' => $this->openAIService->getNoteContent($this->content),
                 'is_content_by_ai' => true,
